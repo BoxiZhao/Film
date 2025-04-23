@@ -18,12 +18,19 @@ a:hover { text-decoration: underline; }
     min-height: 100vh;
 }
 
+/* Sidebar */
 .sidebar {
-    width: 260px;
-    background: #4b3f72;
-    color: #ffffff;
-    padding: 24px 20px;
+    background: #999999;     /* light-grey background */
+    color: #000;
 }
+
+/* Sidebar links */
+.sidebar a           { color:#000; }
+.sidebar a:hover,
+.sidebar .active     { color:#555555; }   /* dark-grey highlight */
+
+/* Titles – dark grey instead of black */
+h1, h2, h3, h4, h5, h6 { color:#333333; }
 
 .logo { font-size: 1.25rem; margin: 0 0 1rem; }
 
@@ -86,13 +93,6 @@ a:hover { text-decoration: underline; }
     line-height: 1;
 }
 
-.btn-primary {
-    background: #1a73e8;
-    color: #fff;
-}
-
-.btn-primary:hover { background: #1558b0; }
-
 /* Navigation buttons */
 .page-nav {
     margin-top: 48px;
@@ -101,11 +101,16 @@ a:hover { text-decoration: underline; }
     align-items: center;
 }
 
-.btn-secondary {
-    background: #6c757d;
-    color: #ffffff;
+/* Primary buttons */
+.btn-primary {
+    background: #e6e6e6;     /* light grey */
+    color: #000;
+}
+.btn-primary:hover {
+    background: #555555;     /* dark grey on hover */
+    color: #fff;
 }
 
-.btn-secondary:hover {
-    background: #565e64;
-}
+/* Secondary buttons (“Back”) */
+.btn-secondary       { background:#555555; color:#fff; }
+.btn-secondary:hover { background:#444444; }
