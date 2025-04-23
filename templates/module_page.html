@@ -1,0 +1,26 @@
+
+{% extends "layout.html" %}
+{% block title %}{{ page_title }} – {{ module.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ page_title }}</h1>
+    <p>This is a placeholder for the <strong>{{ page_title }}</strong> page in the
+       <em>{{ module.name }}</em> module.</p>
+
+    <p>Replace this paragraph with real instructional content, images, or interactive
+       elements according to the design specification.</p>
+
+    <div class="page-nav">
+        {% if prev_slug %}
+        <a href="{{ url_for('module_page', module_id=module_id, page=prev_slug) }}"
+           class="btn btn-secondary">&larr; Back</a>
+        {% else %}
+        <span></span>
+        {% endif %}
+
+        {% if next_slug %}
+        <a href="{{ url_for('module_page', module_id=module_id, page=next_slug) }}"
+           class="btn btn-primary">Next &rarr;</a>
+        {% endif %}
+    </div>
+{% endblock %}

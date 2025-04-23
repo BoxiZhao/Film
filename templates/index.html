@@ -1,0 +1,29 @@
+
+{% extends "layout.html" %}
+{% block title %}Home – Learning Film Photography{% endblock %}
+{% block content %}
+<div class="landing-wrapper">
+    <div class="landing-left">
+        <h2>Select a Module</h2>
+
+        <label class="radio">
+            <input type="radio" name="module-select" value="1" checked>
+            How to use a film camera
+        </label>
+        <label class="radio">
+            <input type="radio" name="module-select" value="2">
+            How to develop film
+        </label>
+
+        <button id="begin-btn" class="btn btn-primary">Begin</button>
+    </div>
+
+    <div class="landing-right">
+        <img id="landing-photo" class="landing-photo" src="" alt="Sample photo">
+        <div class="metadata">
+            <p id="photo-caption"></p>
+            <p id="photo-metadata"></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

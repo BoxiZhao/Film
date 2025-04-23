@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Learning Film Photography{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-5Z9A7y4K5XC9Xa4A+XU9F0HtP/mezpJSwHbUvD0PJ8E="
+            crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <h1 class="logo">Learning Film Photography</h1>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="{{ url_for('landing') }}">Home</a></li>
+                    {% for m_id, m in lessons.items() %}
+                    <li><a href="{{ url_for('module_root', module_id=m_id) }}">{{ m.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            {% if module %}
+            <nav class="module-nav">
+                <h2 class="module-title">{{ module.name }}</h2>
+                <ul>
+                    {% for slug, title in module.pages %}
+                    <li><a href="{{ url_for('module_page', module_id=module_id, page=slug) }}"
+                           class="{{ 'active' if slug == page else '' }}">{{ title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+            {% endif %}
+        </aside>
+
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>
