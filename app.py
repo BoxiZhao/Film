@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, jsonify, redirect, url_for, abort
 from datetime import datetime
 
@@ -7,22 +6,10 @@ app = Flask(__name__)
 # Photo rotation data (URL or static path) and associated metadata
 PHOTO_ROTATION = [
     {
-        "file": "https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?auto=format&fit=crop&w=1000&q=60",
+        "file": "/static/images/welcome.jpg",
         "caption": "Photography by Hans Isaacson",
-        "location": "Glacier National Park, Montana",
-        "film": "Kodak Portra 400"
-    },
-    {
-        "file": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=60",
-        "caption": "Morning light over Hidden Lake",
-        "location": "Glacier National Park, Montana",
-        "film": "Kodak Portra 400"
-    },
-    {
-        "file": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1000&q=60",
-        "caption": "Creek flowing through cedar forest",
-        "location": "Glacier National Park, Montana",
-        "film": "Kodak Portra 400"
+        "location": "Glacier National Park, Montana, Colorado",
+        "film": "Film: Kodak Portra 400"
     }
 ]
 

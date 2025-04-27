@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,38 +5,43 @@
     <title>{% block title %}Learning Film Photography{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-5Z9A7y4K5XC9Xa4A+XU9F0HtP/mezpJSwHbUvD0PJ8E="
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
             crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </head>
 <body>
     <div class="app-container">
+        {% if module %}
         <aside class="sidebar">
             <h1 class="logo">Learning Film Photography</h1>
 
             <nav class="main-nav">
                 <ul>
                     <li><a href="{{ url_for('landing') }}">Home</a></li>
-                    {% for m_id, m in lessons.items() %}
-                    <li><a href="{{ url_for('module_root', module_id=m_id) }}">{{ m.name }}</a></li>
-                    {% endfor %}
                 </ul>
             </nav>
 
-            {% if module %}
             <nav class="module-nav">
-                <h2 class="module-title">{{ module.name }}</h2>
-                <ul>
-                    {% for slug, title in module.pages %}
-                    <li><a href="{{ url_for('module_page', module_id=module_id, page=slug) }}"
-                           class="{{ 'active' if slug == page else '' }}">{{ title }}</a></li>
-                    {% endfor %}
-                </ul>
+                {% for m_id, m in lessons.items() %}
+                    {% if module and module_id == m_id %}
+                        <h2 class="module-title">{{ m.name }}</h2>
+                        <ul>
+                            {% for slug, title in module.pages %}
+                            <li><a href="{{ url_for('module_page', module_id=m_id, page=slug) }}"
+                                   class="sub-module-link {{ 'active' if slug == page else '' }}">{{ title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <ul>
+                            <li><a href="{{ url_for('module_root', module_id=m_id) }}" class="module-link">{{ m.name }}</a></li>
+                        </ul>
+                    {% endif %}
+                {% endfor %}
             </nav>
-            {% endif %}
         </aside>
+        {% endif %}
 
-        <main class="main-content">
+        <main class="main-content {{ 'full-width' if not module else '' }}">
             {% block content %}{% endblock %}
         </main>
     </div>
