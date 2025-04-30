@@ -11,6 +11,7 @@
     --caution-color: #f39c12;
     --caution-bg: #fff3e0;
     --bg-color: #f0f2ee;  /* Slightly darker grey-green */
+    --transition-duration: 0.5s;
 }
 
 body {
@@ -528,12 +529,76 @@ a:hover { text-decoration: underline; }
     position: relative;  /* For absolute positioning of nav buttons */
     max-width: 66.666%;
     margin: 0 auto;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity var(--transition-duration) ease,
+                transform var(--transition-duration) ease;
 }
 
 .main-content.full-width {
     max-width: none;
     margin: 0;
     padding: 0;
+}
+
+.main-content.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.main-content.fade-in {
+    animation: contentFadeIn var(--transition-duration) ease forwards;
+}
+
+@keyframes contentFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Prevent interaction during transition */
+.transitioning {
+    pointer-events: none;
+}
+
+/* Loading indicator */
+.page-loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.page-loader.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.page-loader::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--caution-color);
+    border-radius: 50%;
+    animation: loader 0.8s linear infinite;
+}
+
+@keyframes loader {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Landing page */
