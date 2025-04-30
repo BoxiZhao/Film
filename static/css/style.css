@@ -409,23 +409,43 @@ a:hover { text-decoration: underline; }
 .sidebar a { 
     color: #4a4a4a;
     display: block;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0;
     transition: all 0.2s ease;
-    border-radius: 4px;
-    margin: 0 -0.75rem;
+    position: relative;
+    text-decoration: none;
+    margin: 0;
 }
 
 .sidebar a:hover {
-    background: #d8d8d0;
+    background: transparent;
     color: #4a4a4a;
-    text-decoration: none;
 }
 
 .sidebar a.active { 
-    background: #e8e8e0;
+    background: transparent;
     color: #4a4a4a;
-    border: 1px solid #8a8a82;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: none;
+    box-shadow: none;
+}
+
+.sidebar a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--caution-color);
+    transition: width 0.3s ease;
+}
+
+.sidebar a:hover::before {
+    width: 100%;
+}
+
+.sidebar a.active::before {
+    width: 100%;
+    height: 3px;
 }
 
 /* Main navigation items */
@@ -433,27 +453,22 @@ a:hover { text-decoration: underline; }
 .module-link {
     font-size: 1.1rem;
     font-weight: 400;
-    padding: 0.75rem 0.75rem;
+    padding: 0.75rem 0;
 }
 
 /* Sub-module links */
 .sub-module-link {
     font-size: 0.9rem;
     font-weight: 400;
-    padding: 0.35rem 0.75rem;
+    padding: 0.35rem 0;
 }
 
 /* Active state overrides */
 .sidebar a.active {
-    font-weight: 400;
+    font-weight: 500;
 }
 
-/* Titles */
-h1, h2, h3, h4, h5, h6 { 
-    color: #4a4a4a;
-    margin: 0 0 1rem;
-}
-
+/* Logo style */
 .logo { 
     font-size: 1.25rem;
     margin: 0 0 2rem;
@@ -492,11 +507,15 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 2px solid #8a8a82;
 }
 
-/* Sub-module pages */
+/* Sub-module pages - adjust indentation without affecting underline */
 .module-nav ul ul {
     margin: 0 0 1rem 1rem;
     border-left: 2px solid #8a8a82;
     padding-left: 1rem;
+}
+
+.module-nav ul ul a {
+    padding-left: 0;
 }
 
 /* Main content */
@@ -549,6 +568,9 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
     padding: 0 2.5rem;
     margin-top: 10vh;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-style: italic;
 }
 
 .module-selection {
@@ -599,6 +621,7 @@ h1, h2, h3, h4, h5, h6 {
     border-right: 2px solid #4a4a4a;
     transition: all 0.2s ease;
     line-height: 1;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .module-name {
@@ -612,6 +635,8 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     flex: 1;
     white-space: pre-line;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
 }
 
 /* Style when radio is checked */
@@ -654,6 +679,8 @@ h1, h2, h3, h4, h5, h6 {
     background: #4a4a4a;
     color: white;
     margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
 }
 
 .btn-primary:hover {
@@ -677,7 +704,7 @@ h1, h2, h3, h4, h5, h6 {
     right: 20px;
     color: white;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto Mono', monospace;
     text-align: right;
     z-index: 1;
     left: 20px;
@@ -1004,4 +1031,156 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--caution-color);
     text-decoration: underline;
     font-weight: 500;
+}
+
+/* Elegant Animations and Effects */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Apply animations to elements */
+.landing-content h1 {
+    animation: fadeIn 1s ease-out;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.module-name {
+    position: relative;
+    overflow: hidden;
+}
+
+.module-name::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: shimmer 3s infinite;
+}
+
+.radio {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.radio:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.process-image {
+    transition: transform 0.3s ease;
+}
+
+.process-image:hover {
+    transform: scale(1.05);
+}
+
+.image-caption {
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.image-caption::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--caution-color);
+    transition: width 0.3s ease;
+}
+
+.image-caption:hover::after {
+    width: 100%;
+}
+
+.metadata p {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Add subtle hover effect to navigation links */
+.sidebar a {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.sidebar a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--caution-color);
+    transition: width 0.3s ease;
+}
+
+.sidebar a:hover::before {
+    width: 100%;
+}
+
+/* Add subtle animation to quiz steps */
+.step {
+    transition: all 0.3s ease;
+}
+
+.step:hover {
+    transform: translateY(-5px) rotate(2deg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Add subtle animation to caution box */
+.caution-box {
+    animation: fadeIn 0.5s ease-out;
+    transition: transform 0.3s ease;
+}
+
+.caution-box:hover {
+    transform: scale(1.02);
 }
