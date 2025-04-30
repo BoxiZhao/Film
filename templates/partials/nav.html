@@ -1,0 +1,13 @@
+<div class="page-nav">
+    {% if prev_slug %}
+    <a href="{{ url_for('module_page', module_id=module_id, page=prev_slug) }}"
+       class="btn btn-secondary">&lt; &nbsp; Back</a>
+    {% else %}
+    <span></span>
+    {% endif %}
+
+    {% if next_slug and page != 'welcome' %}
+    <a href="{{ url_for('module_page', module_id=module_id, page=next_slug) }}"
+       class="btn btn-primary">Next &nbsp; &gt;</a>
+    {% endif %}
+</div> 

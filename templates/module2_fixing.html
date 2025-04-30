@@ -1,10 +1,26 @@
-
 {% extends "layout.html" %}
 {% block title %}{{ page_title }} – How to develop film{% endblock %}
 {% block content %}
 
 <h1>Step&nbsp;4. Fixing</h1>
-<p>Pour fixer into the tank, covering the reels completely. Fix for 5 minutes, agitating the first minute and 10 s each subsequent minute. Fixer removes unexposed silver halides, making the image permanent.</p>
+
+<div class="process-steps">
+    <div class="image-row">
+        <div class="step-image">
+            <img src="{{ url_for('static', filename='images/fix.png') }}" alt="Adding fixer to the tank" class="process-image">
+            <div class="image-caption">Pour the fixer into the tank</div>
+        </div>
+
+        <div class="step-image">
+            <img src="{{ url_for('static', filename='images/agitate.png') }}" alt="Agitating the developing tank" class="process-image">
+            <div class="image-caption">Agitate by gently inverting the tank</div>
+        </div>
+    </div>
+
+    <div class="step-content">
+        <p>Pour fixer into the tank, covering the reels completely. Fix for 5 minutes, agitating the first minute and 10 s each subsequent minute. Fixer removes unexposed silver halides, making the image permanent.</p>
+    </div>
+</div>
 
 {% include "partials/nav.html" %}
 {% endblock %}

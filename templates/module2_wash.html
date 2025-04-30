@@ -1,10 +1,19 @@
-
 {% extends "layout.html" %}
 {% block title %}{{ page_title }} – How to develop film{% endblock %}
 {% block content %}
 
 <h1>Step&nbsp;3. Wash (Stopping)</h1>
-<p>Empty the developer and fill the tank with fresh water. Agitate for 30 s then discard. Repeat twice. This stops further development.</p>
+
+<div class="process-steps">
+    <div class="step-image">
+        <img src="{{ url_for('static', filename='images/wash.png') }}" alt="Washing the film with water" class="process-image">
+        <div class="image-caption">Rinse with fresh water to stop development</div>
+    </div>
+
+    <div class="step-content">
+        <p>Empty the developer and fill the tank with fresh water. Agitate for 30 s then discard. Repeat twice. This stops further development.</p>
+    </div>
+</div>
 
 {% include "partials/nav.html" %}
 {% endblock %}

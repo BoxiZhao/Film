@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block title %}{{ page_title }} – How to develop film{% endblock %}
+
+{% block content %}
+<h1>Develop black and white film at home</h1>
+
+<div class="options-container">
+    <div class="option-card">
+        <h2>Quick Start</h2>
+        <p>Follow along with our recommended settings:</p>
+        <ul>
+            <li>Film: ILLFORD HP5</li>
+            <li>ISO: 100</li>
+            <li>Developer: Rodinal</li>
+        </ul>
+        <a href="{{ url_for('module_page', module_id=module_id, page='load_film') }}" class="btn">Start with Recommended Settings</a>
+    </div>
+
+    <div class="option-card">
+        <h2>Custom Settings</h2>
+        <form id="custom-settings" class="custom-form">
+            <div class="form-group">
+                <label for="film_type">Film Type:</label>
+                <select id="film_type" name="film_type" class="form-control">
+                    <option value="ILLFORD HP5">ILLFORD HP5</option>
+                    <option value="Kodak Tri-X 400">Kodak Tri-X 400</option>
+                    <option value="Kodak Portra 400">Kodak Portra 400</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="iso">ISO:</label>
+                <select id="iso" name="iso" class="form-control">
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="400">400</option>
+                    <option value="800">800</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="developer">Developer:</label>
+                <select id="developer" name="developer" class="form-control">
+                    <option value="Rodinal">Rodinal</option>
+                    <option value="D-76">D-76</option>
+                    <option value="HC-110">HC-110</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Start with Custom Settings</button>
+        </form>
+    </div>
+</div>
+
+{% include "partials/nav.html" %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('custom-settings').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(this);
+    
+    // Store options in session
+    fetch('/store_options', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // Redirect to load_film page
+            window.location.href = "{{ url_for('module_page', module_id=module_id, page='load_film') }}";
+        }
+    });
+});
+
+// Also store options for quick start
+document.querySelector('.option-card .btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData();
+    formData.append('film_type', 'ILLFORD HP5');
+    formData.append('iso', '100');
+    formData.append('developer', 'Rodinal');
+    
+    fetch('/store_options', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            window.location.href = this.href;
+        }
+    });
+});
+</script>
+{% endblock %} 

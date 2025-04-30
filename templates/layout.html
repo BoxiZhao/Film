@@ -27,8 +27,10 @@
                         <h2 class="module-title">{{ m.name }}</h2>
                         <ul>
                             {% for slug, title in module.pages %}
-                            <li><a href="{{ url_for('module_page', module_id=m_id, page=slug) }}"
-                                   class="sub-module-link {{ 'active' if slug == page else '' }}">{{ title }}</a></li>
+                                {% if not (module_id == 2 and page == 'quiz' and slug != 'quiz' and slug != 'welcome') %}
+                                <li><a href="{{ url_for('module_page', module_id=m_id, page=slug) }}"
+                                       class="sub-module-link {{ 'active' if slug == page else '' }}">{{ title }}</a></li>
+                                {% endif %}
                             {% endfor %}
                         </ul>
                     {% else %}
@@ -45,5 +47,6 @@
             {% block content %}{% endblock %}
         </main>
     </div>
+    {% block scripts %}{% endblock %}
 </body>
 </html>

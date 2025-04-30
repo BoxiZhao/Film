@@ -1,26 +1,29 @@
-
 {% extends "layout.html" %}
 {% block title %}{{ page_title }} – {{ module.name }}{% endblock %}
 
 {% block content %}
     <h1>{{ page_title }}</h1>
-    <p>This is a placeholder for the <strong>{{ page_title }}</strong> page in the
-       <em>{{ module.name }}</em> module.</p>
+    
+    {% if page == 'welcome' %}
+        {% include 'module2_welcome.html' %}
+    {% else %}
+        <p>This is a placeholder for the <strong>{{ page_title }}</strong> page in the
+           <em>{{ module.name }}</em> module.</p>
 
-    <p>Replace this paragraph with real instructional content, images, or interactive
-       elements according to the design specification.</p>
+        <p>Replace this paragraph with real instructional content, images, or interactive
+           elements according to the design specification.</p>
 
-    <div class="page-nav">
-        {% if prev_slug %}
-        <a href="{{ url_for('module_page', module_id=module_id, page=prev_slug) }}"
-           class="btn btn-secondary">&lt; &nbsp; Back</a>
-        {% else %}
-        <span></span>
+        {% if module_id == 2 and page in ['development', 'fixing'] and film_type and iso and developer %}
+        <div class="current-settings">
+            <h3>Current Settings:</h3>
+            <ul>
+                <li>Film: {{ film_type }}</li>
+                <li>ISO: {{ iso }}</li>
+                <li>Developer: {{ developer }}</li>
+            </ul>
+        </div>
         {% endif %}
+    {% endif %}
 
-        {% if next_slug %}
-        <a href="{{ url_for('module_page', module_id=module_id, page=next_slug) }}"
-           class="btn btn-primary">Next &nbsp; &gt;</a>
-        {% endif %}
-    </div>
+    {% include "partials/nav.html" %}
 {% endblock %}

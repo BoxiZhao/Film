@@ -1,14 +1,35 @@
-
 {% extends "layout.html" %}
-{% block title %}{{ page_title }} – How to develop film{% endblock %}
+{% block title %}{{ page_title }} – Film Development Quiz{% endblock %}
 {% block content %}
 
-<h1>Quiz</h1>
-<ol>
-  <li>Drag the steps into the correct order on the left.</li>
-  <li>When can the film safely see light?</li>
-</ol>
-<p><em>Interactive questions will appear here soon.</em></p>
+<h1>Film Development Quiz</h1>
+<p>Drag and drop the steps into the correct order of film development:</p>
+
+<div class="quiz-container">
+    <div class="steps-container">
+        <div class="step" data-step="1">
+            <span class="step-text">Load the film</span>
+        </div>
+        <div class="step" data-step="2">
+            <span class="step-text">Development</span>
+        </div>
+        <div class="step" data-step="3">
+            <span class="step-text">Wash (Stopping)</span>
+        </div>
+        <div class="step" data-step="4">
+            <span class="step-text">Fixing</span>
+        </div>
+        <div class="step" data-step="5">
+            <span class="step-text">Wash and Dry</span>
+        </div>
+    </div>
+    <div class="quiz-feedback"></div>
+    <button class="btn btn-primary check-answer">Check Answer</button>
+</div>
 
 {% include "partials/nav.html" %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
 {% endblock %}
