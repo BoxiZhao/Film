@@ -28,9 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
         step.setAttribute('draggable', true);
         
         // Mouse events
-        step.addEventListener('dragstart', () => {
+        step.addEventListener('dragstart', (e) => {
             draggedStep = step;
             step.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
         });
 
         step.addEventListener('dragend', () => {
@@ -97,15 +98,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentSteps = [...stepsContainer.querySelectorAll('.step')];
         const currentOrder = currentSteps.map(step => step.querySelector('.step-text').textContent.trim());
         
-        // Debug logging
-        console.log('Current order:', currentOrder);
-        console.log('Correct order:', correctOrder);
-        
         // Compare arrays
         const isCorrect = currentOrder.length === correctOrder.length && 
                          currentOrder.every((step, index) => step === correctOrder[index]);
-        
-        console.log('Is correct:', isCorrect);
 
         feedback.textContent = isCorrect 
             ? 'Correct! You have successfully ordered the film development steps.'

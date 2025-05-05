@@ -8,14 +8,14 @@
     --border-color: #dcdde1;
     --success-color: #27ae60;
     --error-color: #e74c3c;
-    --caution-color: #f39c12;
+    --caution-color: #d35400;  /* Darker orange for better readability */
     --caution-bg: #fff3e0;
     --bg-color: #f0f2ee;  /* Slightly darker grey-green */
     --transition-duration: 0.5s;
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Roboto Mono', monospace;
     line-height: 1.6;
     color: var(--text-color);
     margin: 0;
@@ -36,22 +36,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;  /* Increased from 2.5rem */
     font-weight: 700;
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 2.3rem;  /* Increased from 2rem */
     font-weight: 600;
 }
 
 h3 {
-    font-size: 1.75rem;
+    font-size: 2rem;  /* Increased from 1.75rem */
     font-weight: 600;
 }
 
 p {
     margin-bottom: 1rem;
+    font-size: 1.2rem;  /* Increased from default */
+    line-height: 1.6;
 }
 
 /* Buttons */
@@ -64,6 +66,7 @@ p {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
+    font-size: 1.2rem;  /* Increased from default */
 }
 
 .btn-primary {
@@ -187,15 +190,18 @@ p {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .form-group select,
-.form-group input {
+.form-group input,
+.form-control {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
     font-size: 1rem;
+    font-family: 'Roboto Mono', monospace;
 }
 
 /* Process Steps Layout */
@@ -373,6 +379,7 @@ html, body {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    min-height: 600px; /* Minimum height to ensure content fits */
 }
 
 body {
@@ -392,14 +399,14 @@ a:hover { text-decoration: underline; }
     bottom: 0;
     overflow: hidden;
     display: flex;
-    padding: 0 10%;
+    padding: 0 clamp(2rem, 5%, 10%);
 }
 
 /* Sidebar */
 .sidebar {
     background: #e8e8e0;
     color: #4a4a4a;
-    width: 25%;
+    width: clamp(250px, 25%, 350px);
     padding: 3rem 2rem 3rem 4rem;
     flex-shrink: 0;
     height: 100%;
@@ -452,14 +459,14 @@ a:hover { text-decoration: underline; }
 /* Main navigation items */
 .main-nav a,
 .module-link {
-    font-size: 1.1rem;
+    font-size: 1.3rem;  /* Increased from 1.1rem */
     font-weight: 400;
     padding: 0.75rem 0;
 }
 
 /* Sub-module links */
 .sub-module-link {
-    font-size: 0.9rem;
+    font-size: 1.1rem;  /* Increased from 0.9rem */
     font-weight: 400;
     padding: 0.35rem 0;
 }
@@ -467,6 +474,7 @@ a:hover { text-decoration: underline; }
 /* Active state overrides */
 .sidebar a.active {
     font-weight: 500;
+    font-size: 1.1rem;  /* Keep the same font size as other sub-module links */
 }
 
 /* Logo style */
@@ -474,12 +482,21 @@ a:hover { text-decoration: underline; }
     font-size: 1.25rem;
     margin: 0 0 2rem;
     font-weight: 500;
-    color: #4a4a4a;
+    color: transparent;
+    -webkit-text-stroke: 1px #4a4a4a;
     padding-bottom: 1rem;
     border-bottom: 3px double #8a8a82;
     text-align: left;
     font-style: italic;
     letter-spacing: 0.05em;
+    cursor: default;
+    pointer-events: none;
+}
+
+.logo:hover {
+    text-decoration: none;
+    color: transparent;
+    -webkit-text-stroke: 1px #4a4a4a;
 }
 
 .main-nav ul,
@@ -524,10 +541,11 @@ a:hover { text-decoration: underline; }
     flex: 1;
     background: #ffffff;
     height: 100%;
+    min-height: 600px;
     overflow-y: auto;
-    padding: 3rem;
-    position: relative;  /* For absolute positioning of nav buttons */
-    max-width: 66.666%;
+    padding: clamp(2rem, 5vh, 3rem);
+    position: relative;
+    max-width: min(1200px, 80%);
     margin: 0 auto;
     opacity: 1;
     transform: translateY(0);
@@ -619,39 +637,42 @@ a:hover { text-decoration: underline; }
     position: relative;
     width: clamp(400px, 40%, 800px);
     height: 100%;
+    min-height: 600px;
     background: rgba(255, 255, 255, 0.85);
-    padding: min(5rem, 5vh) min(5rem, 5vw);
+    padding: clamp(3rem, 5vh, 5rem) clamp(3rem, 5vw, 5rem);
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     z-index: 2;
 }
 
 .landing-content h1 {
-    font-size: min(3.5rem, 5vw);
-    margin-bottom: 2rem;
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    margin-bottom: clamp(1rem, 2vh, 2rem);
     color: #4a4a4a;
     line-height: 1.2;
-    padding: 0 2.5rem;
-    margin-top: 10vh;
-    font-family: 'Cormorant Garamond', serif;
+    padding: 0 clamp(1rem, 2vw, 2.5rem);
+    margin-top: clamp(5vh, 10vh, 15vh);
+    font-family: 'Playfair Display', serif;
     font-weight: 700;
     font-style: italic;
 }
 
 .module-selection {
-    margin-top: 10vh;
+    margin-top: clamp(8vh, 15vh, 25vh);
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: min(1.5rem, 3vh);
+    gap: clamp(0.5rem, 1.5vh, 1.5rem);
     width: 100%;
-    padding: 0 2.5rem;
+    padding: 0 clamp(1rem, 2vw, 2.5rem);
+    min-height: 300px;
 }
 
 .module-selection h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    margin-bottom: clamp(0.5rem, 1vh, 1.5rem);
 }
 
 .radio {
@@ -663,8 +684,9 @@ a:hover { text-decoration: underline; }
     border-radius: 4px;
     transition: all 0.2s ease;
     background: white;
-    min-height: min(140px, 18vh);
+    min-height: clamp(60px, 10vh, 140px);
     width: 100%;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .radio input {
@@ -679,8 +701,8 @@ a:hover { text-decoration: underline; }
     background-color: white;
     color: #4a4a4a;
     font-weight: bold;
-    font-size: min(3rem, 4vw);
-    padding: min(30px, 3vh) min(35px, 3vw);
+    font-size: clamp(1.5rem, 2.5vw, 3rem);
+    padding: clamp(10px, 1.5vh, 30px) clamp(15px, 2vw, 35px);
     display: inline-flex;
     align-items: center;
     border-right: 2px solid #4a4a4a;
@@ -690,11 +712,11 @@ a:hover { text-decoration: underline; }
 }
 
 .module-name {
-    padding: min(25px, 2.5vh) min(35px, 3vw);
+    padding: clamp(10px, 1.5vh, 25px) clamp(15px, 2vw, 35px);
     color: #4a4a4a;
     background: white;
     transition: all 0.2s ease;
-    font-size: min(2.4rem, 3.5vw);
+    font-size: clamp(1.2rem, 2vw, 2.4rem);
     line-height: 1.3;
     display: flex;
     align-items: center;
@@ -732,11 +754,11 @@ a:hover { text-decoration: underline; }
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: min(2rem, 3vw);
+    font-size: clamp(1.2rem, 2vw, 2rem);
     line-height: 1.3;
     transition: all 0.2s ease;
     text-align: center;
-    padding: min(15px, 2vh) min(35px, 3vw);
+    padding: clamp(10px, 1.5vh, 15px) clamp(20px, 2.5vw, 35px);
 }
 
 /* Primary buttons */
@@ -802,7 +824,7 @@ a:hover { text-decoration: underline; }
 
 /* Navigation button styling */
 .page-nav .btn {
-    font-size: 1.1rem;
+    font-size: 1.2rem;  /* Increased from 1.1rem */
     padding: 1rem 2rem;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -845,9 +867,9 @@ a:hover { text-decoration: underline; }
 /* Welcome page options */
 .options-container {
     display: flex;
-    gap: 2rem;
+    gap: clamp(1rem, 3%, 2rem);
     margin-top: 3rem;
-    max-width: 1000px;
+    max-width: min(1200px, 90%);
     margin-left: 0;
     margin-right: auto;
 }
@@ -855,7 +877,7 @@ a:hover { text-decoration: underline; }
 .option-card {
     flex: 1;
     background: #e8e8e0;
-    padding: 3rem;
+    padding: clamp(2rem, 5%, 3rem);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     display: flex;
@@ -899,12 +921,14 @@ a:hover { text-decoration: underline; }
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .form-group {
     display: flex;
     align-items: center;
     gap: 1rem;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .form-control {
@@ -914,6 +938,7 @@ a:hover { text-decoration: underline; }
     font-size: 1rem;
     transition: border-color 0.2s ease;
     flex: 1;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .form-control:focus {
@@ -929,6 +954,7 @@ a:hover { text-decoration: underline; }
     color: #4a4a4a;
     border: 2px solid #4a4a4a;
     transition: all 0.2s ease;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .welcome-btn:hover {
@@ -939,9 +965,10 @@ a:hover { text-decoration: underline; }
 
 /* Quiz styles */
 .quiz-container {
-    max-width: 800px;
-    margin: 2rem auto;
+    max-width: min(800px, 90%);
+    margin: clamp(1.5rem, 3vh, 2rem) auto;
     padding: 0;
+    min-height: 500px; /* Ensure minimum height for quiz content */
 }
 
 .steps-container {
@@ -994,12 +1021,14 @@ a:hover { text-decoration: underline; }
 }
 
 .step-text {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #4a4a4a;
     line-height: 1.3;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .quiz-feedback {
+    font-size: 1.2rem;  /* Increased from default */
     margin: 2rem 0;
     padding: 1rem;
     border-radius: 4px;
@@ -1022,6 +1051,7 @@ a:hover { text-decoration: underline; }
 }
 
 .check-answer {
+    font-size: 1.2rem;  /* Increased from default */
     width: 100%;
     margin-top: 2rem;
     padding: 1rem 2rem;
@@ -1048,10 +1078,12 @@ a:hover { text-decoration: underline; }
     color: var(--caution-color);
     margin-bottom: 0.5rem;
     font-weight: 600;
+    font-size: 1.4rem;  /* Increased from default */
 }
 
 .caution-box p {
     margin-bottom: 0.5rem;
+    font-size: 1.2rem;  /* Increased from default */
 }
 
 .caution-box p:last-child {
@@ -1060,15 +1092,9 @@ a:hover { text-decoration: underline; }
 
 /* Centered Content Layout */
 .centered-content {
-    max-width: 66.666%;
+    max-width: min(1000px, 80%);
     margin: 0 auto;
-    padding: 0 2rem;
-}
-
-@media (max-width: 1200px) {
-    .centered-content {
-        max-width: 80%;
-    }
+    padding: 0 clamp(1rem, 3%, 2rem);
 }
 
 @media (max-width: 1400px) {
@@ -1077,7 +1103,7 @@ a:hover { text-decoration: underline; }
     }
     
     .main-content {
-        max-width: 80%;
+        max-width: 85%;
         padding: 2.5rem;
     }
     
@@ -1088,7 +1114,111 @@ a:hover { text-decoration: underline; }
     }
     
     .page-nav {
-        max-width: 80%;
+        max-width: 85%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .centered-content {
+        max-width: 90%;
+    }
+    
+    .step-image {
+        max-width: 350px;
+    }
+    
+    .load-film-image {
+        max-width: 700px;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        width: clamp(200px, 30%, 300px);
+        padding: 2rem 1.5rem 2rem 3rem;
+    }
+    
+    .main-content {
+        max-width: 90%;
+        padding: 2rem;
+    }
+    
+    .load-film-image {
+        max-width: 600px;
+    }
+    
+    .step-image {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        padding: 0;
+    }
+    
+    .sidebar {
+        width: 100%;
+        position: fixed;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        max-width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .image-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    
+    .step-image {
+        max-width: 100%;
+        min-width: 200px;
+    }
+    
+    .load-film-image {
+        max-width: 100%;
+    }
+    
+    .options-container {
+        flex-direction: column;
+    }
+    
+    .option-card {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 1rem;
+    }
+    
+    .step-image {
+        min-width: 150px;
+    }
+    
+    .process-image {
+        padding: 0.5rem;
+    }
+    
+    .image-caption {
+        font-size: 0.8rem;
+    }
+    
+    .page-nav {
+        max-width: 95%;
+        right: 1rem;
+        bottom: 1rem;
     }
 }
 
@@ -1158,23 +1288,7 @@ a:hover { text-decoration: underline; }
 }
 
 .btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent
-    );
-    transition: 0.5s;
-}
-
-.btn-primary:hover::before {
-    left: 100%;
+    display: none;  /* Remove shimmer effect */
 }
 
 .process-image {
@@ -1248,4 +1362,45 @@ a:hover { text-decoration: underline; }
 
 .caution-box:hover {
     transform: scale(1.02);
+}
+
+/* Responsive height adjustments */
+@media (max-height: 800px) {
+    .landing-content {
+        min-height: 500px;
+        padding: clamp(2rem, 4vh, 5rem) clamp(2rem, 4vw, 5rem);
+        justify-content: flex-start;
+    }
+    
+    .landing-content h1 {
+        font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+        margin-top: clamp(4vh, 8vh, 12vh);
+    }
+    
+    .module-selection {
+        margin-top: clamp(6vh, 12vh, 20vh);
+        min-height: 250px;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-height: 600px) {
+    .landing-content {
+        min-height: 400px;
+        padding: clamp(1.5rem, 3vh, 3rem) clamp(1.5rem, 3vw, 3rem);
+        justify-content: flex-start;
+    }
+    
+    .landing-content h1 {
+        font-size: clamp(1.2rem, 3vw, 2rem);
+        margin-top: clamp(3vh, 6vh, 9vh);
+        margin-bottom: 0.5rem;
+    }
+    
+    .module-selection {
+        margin-top: clamp(4vh, 8vh, 15vh);
+        min-height: 200px;
+        gap: 0.5rem;
+        justify-content: flex-start;
+    }
 }

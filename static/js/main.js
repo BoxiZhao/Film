@@ -33,4 +33,19 @@ $(function () {
         console.log('Redirecting to:', url);
         window.location.href = url;
     });
+
+    // Handle sidebar chapter expansion
+    $('.module-link').on('click', function(e) {
+        e.preventDefault();
+        const moduleId = $(this).attr('href').split('/')[2];
+        const url = '/module/' + moduleId + '/';
+        window.location.href = url;
+    });
+
+    // Handle sub-module link clicks
+    $('.sub-module-link').on('click', function(e) {
+        e.preventDefault();
+        const href = $(this).attr('href');
+        window.location.href = href;
+    });
 });

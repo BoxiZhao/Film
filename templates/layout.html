@@ -4,38 +4,29 @@
     <meta charset="UTF-8">
     <title>{% block title %}Learning Film Photography{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto+Mono:ital@0;1&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto+Mono:ital@0;1&display=swap" rel="stylesheet">
     <style>
-        .logo, .landing-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 700;
-        }
-
-        h1, h2, .module-title, .module-link, .main-nav a {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-        }
-        
-        .step-content, .main-content p, .module-nav, .main-nav, .image-caption,
-        .sub-module-link {
-            font-family: 'Roboto Mono', monospace;
-        }
-
-        .variable-param {
-            font-family: 'Roboto Mono', monospace;
-            font-style: italic;
-        }
-
-        /* All buttons and navigation elements */
-        button, .btn, .nav-button, 
+        /* All headings and important text */
+        h1, h2, h3, h4, h5, h6, 
+        .module-title, .module-link, 
+        .main-nav a, .logo,
+        .btn, .nav-button, 
         .begin-button, .module-select-button,
         .next-button, .back-button,
         .welcome-button, #begin-btn,
         .btn-primary, .btn-secondary,
         .check-answer, .option-card .btn,
         .page-nav .btn {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-weight: 700;
+        }
+        
+        /* All body text and navigation */
+        body, p, .step-content, 
+        .main-content, .module-nav, 
+        .main-nav, .image-caption,
+        .sub-module-link, .variable-param {
+            font-family: 'Roboto Mono', monospace;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -70,7 +61,7 @@
                         </ul>
                     {% else %}
                         <ul>
-                            <li><a href="{{ url_for('module_root', module_id=m_id) }}" class="module-link">{{ m.name }}</a></li>
+                            <li><a href="{{ url_for('module_page', module_id=m_id, page='welcome') }}" class="module-link">{{ m.name }}</a></li>
                         </ul>
                     {% endif %}
                 {% endfor %}
