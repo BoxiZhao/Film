@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- NAV BAR STUFF -->
+        <div class="col-3" id="nav-bar">
+            <a href="/"><div id="return-menu"><img src="{{ url_for('static', filename='images/back.png') }}" style="width:6%; height:auto; margin-right:20px;">Return to main menu</div></a>
+            <div id="module-title"><div id="module-num"><strong>2</strong></div><h3>How to develop film</h3></div>
+
+            <div class="spacer" style="height:50px;"></div>
+
+            <a href="/module2"><div class="menu-option">Welcome</div></a>
+            <a href="/module2/load"><div class="menu-option selected">Load the film</div></a>
+            <a href="/module2/development"><div class="menu-option">Development</div></a>
+            <a href="/module2/wash"><div class="menu-option">Wash (Stopping)</div></a>
+            <a href="/module2/fixing"><div class="menu-option">Fixing</div></a>
+            <a href="/module2/dry"><div class="menu-option">Wash and Dry</div></a>
+            <a href="/module2/quiz1"><div class="menu-option">Quiz</div></a>
+
+            <div id="up-next">
+                <div style="padding-left:20px;"><strong>PREVIOUS:</strong></div>
+                <a href="/module1"><div id="next-module">How to use a film camera</div></a>
+            </div>
+
+        </div>
+
+        <!-- ACTUAL CONTENT -->
+
+        <div class="col-9 content" >
+            <div>
+                <h1><strong>Step 1: Load the film</strong></h1>
+                <p>&nbsp;</p>
+            </div>
+            <!--Content here-->
+            <img src="{{ url_for('static', filename='images/load.png') }}" style="max-width:50%">
+            <p>In complete darkness or inside a changing bag, load the exposed roll onto a spiral reel and place it inside the developing tank. 
+                Ensure the lid locks securely to maintain light-tightness.</p>
+
+            <div class="caution">
+                <div style="max-width:10%; padding-right: 20px;"><img src="{{ url_for('static', filename='images/warning.png') }}" style="width:100%; height: auto;"></div>
+                <div>
+                    <h4><strong>Caution</strong></h4>
+                    <p>Any stray light before fixing will fog the undeveloped negatives.</p>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="next-button" onclick="window.location.href='/module2/development'">
+    <span class="btn-text">Next</span>
+    <span class="btn-icon"><img src="{{ url_for('static', filename='images/next.png') }}" style="height:25px;"></span></button>
+
+<button class="back-button" onclick="window.location.href='/module2'">
+    <span class="btn-icon"><img src="{{ url_for('static', filename='images/back.png') }}" style="height:25px;"></span>
+    <span class="btn-text">Back</span>
+</button>
+
+{% endblock %}

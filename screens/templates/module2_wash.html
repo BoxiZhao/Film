@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- NAV BAR STUFF -->
+        <div class="col-3" id="nav-bar">
+            <a href="/"><div id="return-menu"><img src="{{ url_for('static', filename='images/back.png') }}" style="width:6%; height:auto; margin-right:20px;">Return to main menu</div></a>
+            <div id="module-title"><div id="module-num"><strong>2</strong></div><h3>How to develop film</h3></div>
+
+            <div class="spacer" style="height:50px;"></div>
+
+            <a href="/module2"><div class="menu-option">Welcome</div></a>
+            <a href="/module2/load"><div class="menu-option">Load the film</div></a>
+            <a href="/module2/development"><div class="menu-option">Development</div></a>
+            <a href="/module2/wash"><div class="menu-option selected">Wash (Stopping)</div></a>
+            <a href="/module2/fixing"><div class="menu-option">Fixing</div></a>
+            <a href="/module2/dry"><div class="menu-option">Wash and Dry</div></a>
+            <a href="/module2/quiz1"><div class="menu-option">Quiz</div></a>
+
+            <div id="up-next">
+                <div style="padding-left:20px;"><strong>PREVIOUS:</strong></div>
+                <a href="/module1"><div id="next-module">How to use a film camera</div></a>
+            </div>
+
+        </div>
+
+        <!-- ACTUAL CONTENT -->
+
+        <div class="col-9 content" >
+            <div>
+                <h1><strong>Step 3: Wash (Stopping)</strong></h1>
+                <p>&nbsp;</p>
+            </div>
+            <!--Content here-->
+            
+            <img src="{{ url_for('static', filename='images/wash.png') }}" style="max-width:40%">
+            
+                <p>&nbsp;</p>
+                <p>Empty the developer and fill the tank with fresh water. Agitate for 30 s then discard. Repeat twice. This stops further development.</p>
+    
+        </div>
+    </div>
+</div>
+
+<button class="next-button" onclick="window.location.href='/module2/fixing'">
+    <span class="btn-text">Next</span>
+    <span class="btn-icon"><img src="{{ url_for('static', filename='images/next.png') }}" style="height:25px;"></span></button>
+
+<button class="back-button" onclick="window.location.href='/module2/development'">
+    <span class="btn-icon"><img src="{{ url_for('static', filename='images/back.png') }}" style="height:25px;"></span>
+    <span class="btn-text">Back</span>
+</button>
+{% endblock %}
