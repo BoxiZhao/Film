@@ -1,141 +1,95 @@
-from flask import Flask, render_template, jsonify, redirect, url_for, abort, request, session
-from datetime import datetime
-
+from flask import Flask
+from flask import render_template
+from flask import Response, request, jsonify
+from flask import url_for
+import json
 app = Flask(__name__)
-app.secret_key = 'your-secret-key-here'  # Required for session
 
-# Photo rotation data (URL or static path) and associated metadata
-PHOTO_ROTATION = [
-    {
-        "file": "/static/images/welcome.jpg",
-        "caption": "Photography by Hans Isaacson",
-        "location": "Glacier National Park, Montana, Colorado",
-        "film": "Film: Kodak Portra 400"
-    }
-]
 
-# Index pointer for photo rotation
-_photo_index = 0
+# DATA
 
-# Learning modules definition
-LESSONS = {
-    1: {
-        "name": "How to use a film camera",
-        "pages": [
-            ("intro", "Introduction"),
-            ("choose_camera", "Choosing a camera"),
-            ("choose_film", "Choosing film"),
-            ("camera_controls", "Camera controls"),
-            ("compose", "Composing your shot"),
-            ("quiz", "Quiz")
-        ]
-    },
-    2: {
-        "name": "How to develop film",
-        "pages": [
-            ("welcome", "Welcome"),
-            ("load_film", "Load the film"),
-            ("development", "Development"),
-            ("wash", "Wash (Stopping)"),
-            ("fixing", "Fixing"),
-            ("wash_dry", "Wash and Dry"),
-            ("quiz", "Quiz")
-        ]
-    }
-}
 
-@app.context_processor
-def inject_globals():
-    """Inject variables available in every Jinja template"""
-    return {
-        "now": datetime.utcnow(),
-        "lessons": LESSONS
-    }
 
-# Landing page
-@app.route("/")
-def landing():
-    return render_template("index.html")
 
-# Endpoint to rotate photos once per request (client calls every minute)
-@app.route("/next_photo")
-def next_photo():
-    global _photo_index
-    data = PHOTO_ROTATION[_photo_index]
-    _photo_index = (_photo_index + 1) % len(PHOTO_ROTATION)
-    return jsonify(data)
+# ROUTES
 
-# Redirect /module/<id>/ to the first page
-@app.route("/module/<int:module_id>/")
-def module_root(module_id):
-    module = LESSONS.get(module_id)
-    if not module:
-        abort(404)
-    first_page = module["pages"][0][0]
-    return redirect(url_for("module_page", module_id=module_id, page=first_page))
-
-# Store film development options
-@app.route("/store_options", methods=['POST'])
-def store_options():
-    session['film_type'] = request.form.get('film_type', 'ILLFORD HP5')
-    session['iso'] = request.form.get('iso', '100')
-    session['developer'] = request.form.get('developer', 'Rodinal')
-    return jsonify({'status': 'success'})
-
-# Generic module page renderer
-@app.route("/module/<int:module_id>/<page>")
-def module_page(module_id, page):
-    module = LESSONS.get(module_id)
-    if not module:
-        abort(404)
-    # locate page index
-    idx = next((i for i, (slug, _) in enumerate(module["pages"]) if slug == page), None)
-    if idx is None:
-        abort(404)
-    page_title = module["pages"][idx][1]
-    prev_slug = module["pages"][idx - 1][0] if idx > 0 else None
-    next_slug = module["pages"][idx + 1][0] if idx < len(module["pages"]) - 1 else None
+@app.route('/')
+def index():
+    with open('metadata.json') as f:
+         photos = json.load(f)
+        
+    for photo in photos:
+        photo['url'] = url_for('static', filename=f'images/{photo["filename"]}')
     
-    # Get film development options from session or use defaults
-    film_type = session.get('film_type', 'ILLFORD HP5')
-    iso = session.get('iso', '100')
-    developer = session.get('developer', 'Rodinal')
-    
-    # Determine which template to use
-    if page == 'welcome':
-        template = f"module{module_id}_welcome.html"
-    elif page == 'quiz':
-        template = f"module{module_id}_quiz.html"
-    else:
-        template = f"module{module_id}_{page}.html"
-    
-    try:
-        return render_template(
-            template,
-            module_id=module_id,
-            module=module,
-            page=page,
-            page_title=page_title,
-            prev_slug=prev_slug,
-            next_slug=next_slug,
-            film_type=film_type,
-            iso=iso,
-            developer=developer
-        )
-    except:
-        # Fallback to generic template if specific template doesn't exist
-        return render_template(
-            "module_page.html",
-            module_id=module_id,
-            module=module,
-            page=page,
-            page_title=page_title,
-            prev_slug=prev_slug,
-            next_slug=next_slug,
-            film_type=film_type,
-            iso=iso,
-            developer=developer
-        )
+    return render_template('index.html', photos=photos)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
+@app.route('/module1')
+def module1_intro():
+    return render_template('module1_introduction.html')
+
+@app.route('/module1/choosing-camera')
+def module1_choosing_camera():
+    return render_template('module1_choosing_camera.html')
+
+@app.route('/module1/choosing-film')
+def module1_choosing_film():
+    return render_template('module1_choosing_film.html')
+
+@app.route('/module1/camera-controls')
+def module1_camera_controls():
+    return render_template('module1_camera_controls.html')
+
+@app.route('/module1/composing-shot')
+def module1_composing_shot():
+    return render_template('module1_composing_shot.html')
+
+@app.route('/module1/quiz1')
+def module1_quiz1():
+    return render_template('module1_quiz1.html')
+
+@app.route('/module1/quiz2')
+def module1_quiz2():
+    return render_template('module1_quiz2.html')
+
+@app.route('/module1/quiz3')
+def module1_quiz3():
+    return render_template('module1_quiz3.html')
+
+@app.route('/module2')
+def module2_intro():
+    return render_template('module2_introduction.html')
+
+@app.route('/module2/load')
+def module2_load():
+    return render_template('module2_load.html')
+
+@app.route('/module2/development')
+def module2_development():
+    return render_template('module2_development.html')
+
+@app.route('/module2/wash')
+def module2_wash():
+    return render_template('module2_wash.html')
+
+@app.route('/module2/fixing')
+def module2_fixing():
+    return render_template('module2_fixing.html')
+
+@app.route('/module2/dry')
+def module2_dry():
+    return render_template('module2_dry.html')
+
+@app.route('/module2/quiz1')
+def module2_quiz1():
+    return render_template('module2_quiz1.html')
+
+@app.route('/finish')
+def finish():
+    return render_template('finish.html')
+
+
+#Dont touch ts
+
+if __name__ == '__main__':
+   app.run(debug = True, port=5001)
