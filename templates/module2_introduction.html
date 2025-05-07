@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- NAV BAR STUFF -->
+        <div class="col-3" id="nav-bar">
+            <a href="/"><div id="return-menu"><img src="{{ url_for('static', filename='images/back.png') }}" style="width:6%; height:auto; margin-right:20px;">Return to main menu</div></a>
+            <div id="module-title"><div id="module-num"><strong>2</strong></div><h3>How to develop film</h3></div>
+
+            <div class="spacer" style="height:50px;"></div>
+
+            <a href="/module2"><div class="menu-option selected">Welcome</div></a>
+            <a href="/module2/load"><div class="menu-option">Load the film</div></a>
+            <a href="/module2/development"><div class="menu-option">Development</div></a>
+            <a href="/module2/wash"><div class="menu-option">Wash (Stopping)</div></a>
+            <a href="/module2/fixing"><div class="menu-option">Fixing</div></a>
+            <a href="/module2/dry"><div class="menu-option">Wash and Dry</div></a>
+            <a href="/module2/quiz1"><div class="menu-option">Quiz</div></a>
+
+            <div id="up-next">
+                <div style="padding-left:20px;"><strong>PREVIOUS:</strong></div>
+                <a href="/module1"><div id="next-module">How to use a film camera</div></a>
+            </div>
+
+        </div>
+
+        <!-- ACTUAL CONTENT -->
+
+        <div class="col-9 content" >
+            <div>
+                <h1><strong>Develop black and white film at home</strong></h1>
+                <p>&nbsp;</p>
+            </div>
+            <div class="row">
+                <div class="col-5 option-card">
+                    <h4>Quick Start:</h4>
+                    <p>&nbsp;</p>
+                    <p>Follow along with our recommended settings:</p>
+                    <p>&nbsp;</p>
+                    <p>Film: <strong>ILLFORD HP5</strong></p>
+                    <p>ISO: <strong>100</strong></p>
+                    <p>Developer: <strong>Rodinal</strong></p>
+
+                    <div style="flex:1; display:flex; flex-direction:column; justify-content: flex-end;">
+                        <a href="/module2/load"><div class="begin-button">Begin with default settings</div></a>
+                    </div>
+                </div>
+                <div class="col-5 option-card">
+                    <h4>Custom Settings:</h4>
+
+                    <p>&nbsp;</p>
+                    
+                    <select class="dropdown">
+                        <option value="" disabled selected>Film Type</option>
+                        <option value="illford">ILLFORD HP5</option>
+                        <option value="trix">Kodak Tri-X 400</option>
+                        <option value="portra">Kodak Portra 400</option>
+                    </select>
+                    
+                    <select class="dropdown">
+                        <option value="" disabled selected>ISO</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="400">400</option>
+                        <option value="800">800</option>
+                    </select>
+
+                    <select class="dropdown">
+                        <option value="" disabled selected>Developer</option>
+                        <option value="Rodinal">Rodinal</option>
+                        <option value="d76">D-76</option>
+                        <option value="hc110">HC-110</option>
+                    </select>
+
+                    <div style="flex:1; display:flex; flex-direction:column; justify-content: flex-end;">
+                        <a href="/module2/load"><div class="begin-button">Begin with custom settings</div></a>
+                    </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="next-button" onclick="window.location.href='/module2/load'">
+    <span class="btn-text">Next</span>
+    <span class="btn-icon"><img src="{{ url_for('static', filename='images/next.png') }}" style="height:25px;"></span></button>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取所有下拉菜单
+    const filmSelect = document.querySelector('select:nth-of-type(1)');
+    const isoSelect = document.querySelector('select:nth-of-type(2)');
+    const developerSelect = document.querySelector('select:nth-of-type(3)');
+
+    // 为每个下拉菜单添加change事件监听器
+    filmSelect.addEventListener('change', function() {
+        localStorage.setItem('selectedFilm', this.value);
+    });
+
+    isoSelect.addEventListener('change', function() {
+        localStorage.setItem('selectedIso', this.value);
+    });
+
+    developerSelect.addEventListener('change', function() {
+        localStorage.setItem('selectedDeveloper', this.value);
+    });
+
+    // 为默认设置按钮添加点击事件
+    document.querySelector('.begin-button').addEventListener('click', function() {
+        localStorage.setItem('selectedFilm', 'ILLFORD HP5');
+        localStorage.setItem('selectedIso', '100');
+        localStorage.setItem('selectedDeveloper', 'Rodinal');
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="icon" href="data:,">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- jquery -->
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>  
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <style>
+    /* 基础字体设置 */
+    body {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* 标题字体设置 */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    h1 { font-size: 2.5rem; }  /* 约45px */
+    h2 { font-size: 2rem; }    /* 约36px */
+    h3 { font-size: 1.75rem; } /* 约31.5px */
+    h4 { font-size: 1.5rem; }  /* 约27px */
+    h5 { font-size: 1.25rem; } /* 约22.5px */
+    h6 { font-size: 1.1rem; }  /* 约19.8px */
+
+    /* 段落和列表文本 */
+    p, li {
+      font-size: 1.1rem;  /* 约19.8px */
+      line-height: 1.6;
+    }
+  </style>
+
+  {% block head %}{% endblock %}
+
+  </head>
+
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- NAV BAR STUFF -->
+        <div class="col-3" id="nav-bar">
+            <a href="/"><div id="return-menu"><img src="{{ url_for('static', filename='images/back.png') }}" style="width:6%; height:auto; margin-right:20px;">Return to main menu</div></a>
+            <div id="module-title"><div id="module-num"><strong>1</strong></div><h3>How to use a film camera</h3></div>
+
+            <div class="spacer" style="height:50px;"></div>
+
+            <a href="/module1"><div class="menu-option">Introduction</div></a>
+            <a href="/module1/choosing-camera"><div class="menu-option">Choosing a camera</div></a>
+            <a href="/module1/camera-controls"><div class="menu-option">Camera controls</div></a>
+            <a href="/module1/composing-shot"><div class="menu-option selected">Composing your shot</div></a>
+            <a href="/module1/quiz1"><div class="menu-option">Quiz</div></a>
+
+            <div id="up-next">
+                <div style="padding-left:20px;"><strong>UP NEXT:</strong></div>
+                <a href="/module2"><div id="next-module">How to develop film</div></a>
+            </div>
+
+        </div>
+
+        <!-- ACTUAL CONTENT -->
+
+        <div class="col-9 content" >
+            <div>
+                <h1><strong>Composing your shot</strong></h1>
+                <div class="spacer" style="height:50px;"></div>
+
+                <!--START WRITING-->
+                <div class="accordion container">
+                    <details class="full-details">
+                      <summary class="summary-title">Rule of Thirds</summary>
+                      <div class="content">
+                        <div class="row">
+                            <div class="col-6">
+                                <img src="{{ url_for('static', filename='images/thirds.jpg') }}" alt="image with 3 by 3 grid indicating rule of thirds" style="max-width:100%">
+                            </div>
+                            <div class="col-6"><p>The rule of thirds divides your frame into nine equal parts using two horizontal and two vertical lines. 
+                                    Placing key elements along these lines or at their intersections creates visual interest and balance. 
+                                    This simple but powerful guideline helps you move beyond centering every subject and creates more dynamic compositions.</p>
+                                    <p>In this example, the tree is aligned along the right vertical third line. Also, rather than centering the horizon, the horizon is aligned along the topmost third line.</p>
+                            </div>
+                        </div>
+                      </div>
+                    </details>
+                  
+                    <details class="full-details">
+                      <summary class="summary-title">Leading Lines</summary>
+                      <div class="content">
+                        <div class="row">
+                            <div class="col-6">
+                                <img src="{{ url_for('static', filename='images/leading.jpeg') }}" alt="bridge suspended over water" style="max-width:100%">
+                            </div>
+                            <div class="col-6">
+                                <p>Leading lines are visual paths that guide the viewer's eye through your image toward your main subject. 
+                                    Look for natural lines in your environment—roads, fences, buildings, or even patterns of light and shadow. 
+                                    Position these lines to draw attention to your focal point, creating depth and visual flow.</p>
+                            </div>
+                        </div>
+                      </div>
+                    </details>
+                  
+                    <details class="full-details">
+                      <summary class="summary-title">Framing</summary>
+                      <div class="content">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="{{ url_for('static', filename='images/framed.jpg') }}" alt="cn tower framed by two black buildings" style="max-width:80%;">
+                            </div>
+                        <div class="col-9">
+                            <p>Use elements in your scene to create a "frame within a frame" around your subject. 
+                                Doorways, windows, tree branches, or architectural features can add context, depth, and focus to your image. 
+                                Effective framing draws attention to your subject while adding layers of visual interest and storytelling to your composition.</p>
+                                <p>In this oft-replicated photo, Toronto's CN Tower is framed by two buildings, bringing into focus.</p>
+                        </div>
+                      </div>
+                    </details>
+                  </div>
+                  
+        
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="next-button" onclick="window.location.href='/module1/quiz1'">
+    <span class="btn-text">Next</span>
+    <span class="btn-icon"><img src="{{ url_for('static', filename='images/next.png') }}" style="height:25px;"></span>
+</button>
+
+<button class="back-button" onclick="window.location.href='/module1/camera-controls'">
+    <span class="btn-icon"><img src="{{ url_for('static', filename='images/back.png') }}" style="height:25px;"></span>
+    <span class="btn-text">Back</span>
+</button>
+
+<script src="{{ url_for('static', filename='js/module1_composing_shot.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,17 @@
+[
+    {
+      "filename": "photo1.jpg",
+      "photographer": "Hans Isaacson",
+      "title": "Glacier National Park",
+      "location": "Montana, Colorado",
+      "equipment": "Kodak Portra 400"
+    },
+    {
+        "filename": "photo2.jpeg",
+        "photographer": "Hans Isaacson",
+        "title": "Gold Coast",
+        "location": "Gold Coast, Australia",
+        "equipment": "Kodak Portra 400"
+      }
+  ]
+  
