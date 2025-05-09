@@ -108,12 +108,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
         // Update feedback
         if(isCorrect){
-            $('#feedback').text('Correct! You have successfully ordered the film development steps.').show();
+            $('#feedback-title').removeClass('incorrect');
+            $('#feedback-title').addClass('correct');
+            $('#feedback-title').text('Correct!').show();
+            $('#feedback-info').text('Good job placing the steps in the right order.').show();
             $('#check').hide();
             $('#next').show();
         }
         else{
-            $('#feedback').text('Not quite. Please try again to get the correct order.').show();
+            $('#feedback-title').removeClass('correct');
+            $('#feedback-title').addClass('incorrect');
+            $('#feedback-title').text('Not quite.').show();
+            $('#feedback-info').text('Please try again.').show();
         }
     });
     
