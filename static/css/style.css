@@ -498,6 +498,10 @@ input[type="range"] {
     /*min-height: 500px; /* Ensure minimum height for quiz content */
 }
 
+#feedback{
+  height:30vh;
+}
+
 .steps-container {
     display: flex;
     flex-direction: row;
@@ -575,6 +579,16 @@ input[type="range"] {
     background: #ffebee;
     color: #c62828;
     border: 1px solid #ef9a9a;
+}
+
+.correct{
+  font-size:20px !important;
+  color: green !important;
+}
+
+.incorrect{
+  font-size:20px !important;
+  color:orange !important;
 }
 
 /*Finish*/
